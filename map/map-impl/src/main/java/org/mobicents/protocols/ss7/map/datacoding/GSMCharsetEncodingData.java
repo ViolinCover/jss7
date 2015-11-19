@@ -48,6 +48,10 @@ public class GSMCharsetEncodingData {
         this.ussdStyleEncoding = true;
     }
 
+    public int getTotalSptetCount() {
+        return totalSeptetCount;
+    }
+
     public int getTotalSeptetCount() {
         return totalSeptetCount;
     }

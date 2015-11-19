@@ -167,10 +167,18 @@ public class UserDataImpl implements UserData {
                     } catch (Exception e) {
                         // This can not occur
                     }
+                    // [fnaqvi] Note we get septetcount including header if any. still misusing gsmcharencoder
                     this.encodedUserDataLength = encoder.getGSMCharsetEncodingData().getTotalSeptetCount();
                     if (bb != null) {
-                        this.encodedData = new byte[bb.limit()];
-                        bb.get(this.encodedData);
+                        // [fnaqvi] we need to encode our header
+                        if (buf2 != null && buf2.length > 0) {
+                            this.encodedData = new byte[buf2.length + bb.limit()];
+                            System.arraycopy(buf2,0, this.encodedData,0,buf2.length);
+                            bb.get(this.encodedData, buf2.length, bb.limit());
+                        } else {
+                            this.encodedData = new byte[bb.limit()];
+                            bb.get(this.encodedData);
+                        }
                     } else {
                         this.encodedData = new byte[0];
                     }

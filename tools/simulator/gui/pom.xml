@@ -2,7 +2,7 @@
 	<parent>
 		<artifactId>simulator-parent</artifactId>
 		<groupId>org.mobicents.protocols.ss7.tools.simulator</groupId>
-		<version>2.1.0.FINAL</version>
+		<version>2.1.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
@@ -82,5 +82,31 @@
 		</dependencies>
 	</dependencyManagement>
 
+        <build>
+                <plugins>
+                        <plugin>
+                                <artifactId>maven-assembly-plugin</artifactId>
+                                <configuration>
+                                        <archive>
+                                                <manifest>
+                                                        <mainClass>org.mobicents.protocols.ss7.tools.simulatorgui.MainGui</mainClass>
+                                                </manifest>
+                                        </archive>
+                                        <descriptorRefs>
+                                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                                        </descriptorRefs>
+                                </configuration>
+                                <executions>
+                                        <execution>
+                                                <id>make-assembly</id>
+                                                <phase>package</phase>
+                                                <goals>
+                                                        <goal>single</goal>
+                                                </goals>
+                                        </execution>
+                                </executions>
+                        </plugin>
+                </plugins>
+        </build>
 
 </project>

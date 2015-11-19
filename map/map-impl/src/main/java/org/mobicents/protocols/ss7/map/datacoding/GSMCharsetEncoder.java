@@ -93,9 +93,13 @@ public class GSMCharsetEncoder extends CharsetEncoder {
             int septetCount = (this.encodingData.leadingBuffer.length * 8 + 6) / 7;
             bitpos = septetCount % 8;
             this.encodingData.totalSeptetCount = septetCount;
-            for (int ind = 0; ind < this.encodingData.leadingBuffer.length; ind++) {
+            /* [fnaqvi] Lets not encode leading buffer here as that is header and should be encoded
+             somewhere else and not with gsm chars
+             but we do want to use the length to find out septetCount
+             */
+/*            for (int ind = 0; ind < this.encodingData.leadingBuffer.length; ind++) {
                 out.put(this.encodingData.leadingBuffer[ind]);
-            }
+            }*/
         }
 
         char lastChar = ' ';
@@ -168,4 +172,6 @@ public class GSMCharsetEncoder extends CharsetEncoder {
         if (this.encodingData != null)
             this.encodingData.totalSeptetCount++;
     }
+
+
 }
